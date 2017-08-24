@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Item Info</title>
+	</head>
+	<body>
+		<a href="/dashboard">Home</a>   <a href="/logout">Logout</a>
+		<h3>{{thisItem.name}}</h3>
+		<h4>Users who added this product/item to their wish list:</h4>
+			<p>{{thisItem.created_by.name}}</p>
+			{% for user in thisItem.added_by.all %}
+				<p>{{user.name}}</p>
+			{% endfor %}		
+	</body>
+</html>

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Create Item</title>
+	</head>
+	<body>
+		{% if messages %}
+			{% for message in messages %}
+				{% if message.tags == 'error' %}
+					<p style="color:red">{{message}}</p>
+				{% endif %}
+			{% endfor %}
+		{% endif %}
+		<a href="/dashboard">Home </a>   <a href="/logout">Log Out </a>
+		<h3>Create a New Wish List Item </h3>
+		<form action="/wish_items/create" method="post">
+			{% csrf_token %}
+			<input type="text" name="item_name">
+			<input type="hidden" name="user_id" value="{{request.session.userid}}">
+			<input type="submit" name="submit" value="Add">
+		</form>
+	</body>
+</html>

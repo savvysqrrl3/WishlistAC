@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Wish List Login and Registration</title>
+	</head>
+	<body>
+	{% if messages %}
+		{% for message in messages %}
+			{% if message.tags == 'error' %}
+				<p style="color:red">{{message}}</p>
+			{% endif %}
+			{% if message.tags == 'success' %}
+				<p style="color:green">{{message}}</p>
+			{% endif %}
+		{% endfor %}
+	{% endif %}
+
+		<h1>Registration</h1>
+		<form action="/register" method="post">
+			{% csrf_token %}
+			<h5>Name: <input type="text" name="name" placeholder="Enter your name"></h5> 
+			<h5>Username: <input type="text" name="username" placeholder="Enter your username"></h5> 
+			<h5>Password: <input type="password" name="password" placeholder="Enter a password"></h5> 
+			<h5>Confirm password: <input type="password" name="confirmpw" placeholder="Reenter password"></h5> 
+			<h5>Date hired: <input type="date" name="created_at"></h5> 
+			<input type="submit" name="submit" value="Register">
+		</form>
+		
+		<h1>Log In</h1>
+		<form action="/login" method="post">
+			{% csrf_token %}
+			<h5>Username: <input type="text" name="username" placeholder="Enter your username"></h5> 
+			<h5>Password: <input type="password" name="password" placeholder="Enter your password"></h5> 
+			<input type="submit" name="submit" value="Log In">
+		</form>
+	</body>
+</html>

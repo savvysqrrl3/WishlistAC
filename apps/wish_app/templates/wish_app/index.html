@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Wishlist Dashboard</title>
+	</head>
+	<body>
+		<a href="/logout">Log Out </a>
+		<h3>Welcome, {{request.session.username}}! </h3>
+		
+		<a href="/wish_items">Add Item </a>
+		
+		<h5>Your Wish List:</h5>
+			<table>
+				<tr>
+					<td>Item</td>
+					<td>Added by</td>
+					<td>Date Added</td>
+					<td>Actions</td>
+				</tr>
+				{% for item in my_items %}
+				<tr>
+					<td><a href="/show/{{item.id}}">{{item.name}}</a></td>
+					<td> {{item.created_by.name}}  </td>
+					<td>{{item.created_at}}</td>
+					<td>
+						<form action="/delete/{{item.id}}" method="post">
+							{% csrf_token %}
+						 	<input type="submit" name="submit" value="Delete"> 	
+						</form>
+					</td>
+				</tr>
+				{% endfor %}
+				{% for item in added_items %}
+				<tr>
+					<td><a href="/show/{{item.id}}">{{item.name}}</a></td>
+					<td> {{item.created_by.name}}  </td>
+					<td>{{item.created_at}}</td>
+					<td>
+						<a href="/removeItem/{{item.id}}">Remove from my Wishlist </a>
+					</td>
+				</tr>
+				{% endfor %}
+			</table>
+
+		<h5>Other Users' Wish List</h5>
+			<table>
+				<tr>
+					<td>Item</td>
+					<td>Added by</td>
+					<td>Date Added</td>
+					<td>Actions</td>
+				</tr>
+				{% for item in all_others %}
+					<tr>
+						<td><a href="/show/{{item.id}}">{{item.name}}</a></td>
+						<td>{{item.created_by.name}} </td>
+						<td>{{item.created_at}}</td>
+						<td><a href="/addItem/{{item.id}}">Add to my Wishlist </a></td>
+					</tr>	
+				{% endfor %}
+			</table>
+		
+	</body>
+</html>
